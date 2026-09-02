@@ -1,0 +1,33 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to Staging Server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGE_HOST }}
+          username: ${{ secrets.STAGE_USER }}
+          key: ${{ secrets.STAGE_KEY }}
+
+          script: |
+            set -e
+
+            cd /var/www/mess/backend
+
+            git fetch origin
+            git reset --hard origin/develop
+
+            cd ..
+
+            docker compose build api
+            docker compose up -d api
+
+            docker image prune -f
