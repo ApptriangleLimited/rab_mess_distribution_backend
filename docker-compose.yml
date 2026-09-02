@@ -1,0 +1,14 @@
+# Backend API — docker compose up -d --build
+# Linux: host network so DATABASE_URL 127.0.0.1 MySQL + ZK device work.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      # Browser Origin has no trailing slash (not https://ms.apptriangle.com/).
+      CORS_ORIGINS: https://ms.apptriangle.com
+    restart: unless-stopped

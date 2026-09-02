@@ -1,0 +1,14 @@
+# Mess backend runtime deps (mirror pyproject.toml).
+# pip install -r requirements.txt
+
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy>=2.0
+alembic>=1.14
+pymysql>=1.1
+cryptography>=43
+pydantic-settings>=2.4
+argon2-cffi>=23
+PyJWT>=2.9
+email-validator>=2
+pyzk>=0.9
